@@ -1,3 +1,6 @@
+1.0.0
+- Fix Logger dependency issue in 8.4.5+.
+
 0.9.1
 - Make sure that after each optimize query, the statistics are updated (instead of once in the end).
 

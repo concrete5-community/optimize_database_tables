@@ -5,30 +5,30 @@ namespace A3020\OptimizeDatabaseTables\Job;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Database\Connection\Connection;
-use Concrete\Core\Logging\Logger;
 use Concrete\Core\Utility\Service\Number;
 use Exception;
+use Psr\Log\LoggerInterface;
 
 class Optimizer implements ApplicationAwareInterface
 {
     use ApplicationAwareTrait;
 
     /**
-     * @var Connection
+     * @var \Concrete\Core\Database\Connection\Connection
      */
     private $db;
 
     /**
-     * @var Logger
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     /**
-     * @var Number
+     * @var \Concrete\Core\Utility\Service\Number
      */
     private $numberHelper;
 
-    public function __construct(Connection $db, Logger $logger, Number $numberHelper)
+    public function __construct(Connection $db, LoggerInterface $logger, Number $numberHelper)
     {
         $this->db = $db;
         $this->logger = $logger;
@@ -61,7 +61,7 @@ class Optimizer implements ApplicationAwareInterface
 
                 $this->updateSpaceFreed($tableStatus['Data_free']);
             } catch (Exception $e) {
-                $this->logger->addDebug($e->getMessage());
+                $this->logger->debug($e->getMessage());
             }
         }
 
